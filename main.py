@@ -31,6 +31,8 @@ def checkDraw(): # Checks if game ended in draw
 
 game = True
 
+print("The coordinates start at [0][0] at the top left square to [2][2] in the bottom right.")
+
 while game: # game loop
     if checkDraw():
         print("Draw.")
