@@ -45,10 +45,13 @@ while game: # game loop
         try: 
             move_x1 = int(input("Player 1, enter your x coordinate:"))
             move_y1 = int(input("Player 1, enter your y coordinate:"))
-            if 0 <= move_x1 <= 2 and 0<= move_y1 <= 2:
-                break
-            else:
+            if not 0 <= move_x1 <= 2 and not 0<= move_y1 <= 2:
                 print("Enter integers between 0 and 2.")
+            elif not board[move_x1][move_y1] == "?":
+                print("That square is occupied. Retry.")
+            else:
+                break
+
         except ValueError:
             print("Enter integers between 0 and 2.")
 
@@ -69,12 +72,15 @@ while game: # game loop
         try: 
             move_x2 = int(input("Player 2, enter your x coordinate:"))
             move_y2 = int(input("Player 2, enter your y coordinate:"))
-            if 0 <= move_x2 <= 2 and 0<= move_y2 <= 2:
-                break
-            else:
+            if not 0 <= move_x2 <= 2 and not 0<= move_y2 <= 2:
                 print("Enter integers between 0 and 2.")
+            elif not board[move_x2][move_y2] == "?":
+                print("That square is occupied. Retry.")
+            else:
+                break
+
         except ValueError:
-            print("Enter an integer between 0 and 2.")
+            print("Enter integers between 0 and 2.")
 
     print("Player 2 made his move.")
     boardUpdate(board, move_x2, move_y2, "O")
