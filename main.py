@@ -40,8 +40,18 @@ while game: # game loop
         break
     
     boardDisplay(board)
-    move_x1 = int(input("Player 1, enter your x coordinate:"))
-    move_y1 = int(input("Player 1, enter your y coordinate:"))
+
+    while True: 
+        try: 
+            move_x1 = int(input("Player 1, enter your x coordinate:"))
+            move_y1 = int(input("Player 1, enter your y coordinate:"))
+            if 0 <= move_x1 <= 2 and 0<= move_y1 <= 2:
+                break
+            else:
+                print("Enter integers between 0 and 2.")
+        except ValueError:
+            print("Enter integers between 0 and 2.")
+
     print("Player 1 made his move.")
     boardUpdate(board, move_x1, move_y1, "X")
     boardDisplay(board)
@@ -55,8 +65,18 @@ while game: # game loop
         game += False
         break
     
-    move_x2 = int(input("Player 2, enter your x coordinate:"))
-    move_y2 = int(input("Player 2, enter your y coordinate:"))
+    while True: 
+        try: 
+            move_x2 = int(input("Player 2, enter your x coordinate:"))
+            move_y2 = int(input("Player 2, enter your y coordinate:"))
+            if 0 <= move_x2 <= 2 and 0<= move_y2 <= 2:
+                break
+            else:
+                print("Enter integers between 0 and 2.")
+        except ValueError:
+            print("Enter an integer between 0 and 2.")
+
+    print("Player 2 made his move.")
     boardUpdate(board, move_x2, move_y2, "O")
     boardDisplay(board)
     if checkWinner():
