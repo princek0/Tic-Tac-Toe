@@ -12,7 +12,7 @@ def boardUpdate(board, move_x, move_y, letter): # Adds move to board
         
 
 def checkWinner():
-    for i in range(3):
+    for i in range(3): # i = 0,1,2
         if board[i][0] == board[i][1] == board[i][2] != "?": # Checks if three are in a row vertically
             return True
         elif board[0][i] == board[1][i] == board[2][i] != "?": # Check if three are in a row horizontally
@@ -29,7 +29,7 @@ def checkDraw(): # Checks if game ended in draw
 
 
 
-game = True
+game = True # variable for game loop
 
 print("The coordinates start at [0][0] at the top left square to [2][2] in the bottom right.")
 
@@ -45,9 +45,9 @@ while game: # game loop
         try: 
             move_x1 = int(input("Player 1, enter your x coordinate:"))
             move_y1 = int(input("Player 1, enter your y coordinate:"))
-            if not 0 <= move_x1 <= 2 and not 0<= move_y1 <= 2:
+            if not 0 <= move_x1 <= 2 and not 0<= move_y1 <= 2: # checks if user input is valid
                 print("Enter integers between 0 and 2.")
-            elif not board[move_x1][move_y1] == "?":
+            elif not board[move_x1][move_y1] == "?": # checks if selected square has been occupied
                 print("That square is occupied. Retry.")
             else:
                 break
