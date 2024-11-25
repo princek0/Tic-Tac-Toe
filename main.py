@@ -12,7 +12,10 @@ def boardUpdate(board, move_x, move_y, letter): # Adds move to board
         
 
 def checkWinner():
-    for i in range(3): # i = 0,1,2
+    
+    i = 0
+
+    while i <= 2:
         if board[i][0] == board[i][1] == board[i][2] != "?": # Checks if three are in a row vertically
             return True
         elif board[0][i] == board[1][i] == board[2][i] != "?": # Check if three are in a row horizontally
@@ -22,7 +25,9 @@ def checkWinner():
         elif board[0][2] == board[1][1] == board[2][0] != "?"  : # Checks the bottom left to top right diagonal
             return True
         else:
-            return False
+            i += 1
+    
+    return False
             
 def checkDraw(): # Checks if game ended in draw
     return not any("?" in subboard for subboard in board)
@@ -89,5 +94,6 @@ while game: # game loop
         print("Player 2 won.")
         game += False
         break
+
     print("-------------------------------------------------------------")
     
