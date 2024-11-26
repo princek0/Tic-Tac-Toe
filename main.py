@@ -1,3 +1,6 @@
+import random
+
+
 board = [["?","?","?"],["?","?","?"],["?","?","?"]]
 
 def boardDisplay(board): # Displays the board in terminal
@@ -34,66 +37,130 @@ def checkDraw(): # Checks if game ended in draw
 
 
 
-game = True # variable for game loop
 
 print("The coordinates start at [0][0] at the top left square to [2][2] in the bottom right.")
 
-while game: # game loop
-    if checkDraw():
-        print("Draw.")
-        game += False
-        break
-    
-    boardDisplay(board)
+def computer():
+    game = True
+    while game: # game loop
+        if checkDraw():
+            print("Draw.")
+            game += False
+            break
+        
+        boardDisplay(board)
 
-    while True: 
-        try: 
-            move_x1 = int(input("Player 1, enter your x coordinate:"))
-            move_y1 = int(input("Player 1, enter your y coordinate:"))
-            if not 0 <= move_x1 <= 2 or not 0<= move_y1 <= 2: # checks if user input is valid
+        while True: 
+            try: 
+                move_x1 = int(input("Player 1, enter your x coordinate:"))
+                move_y1 = int(input("Player 1, enter your y coordinate:"))
+                if not 0 <= move_x1 <= 2 or not 0<= move_y1 <= 2: # checks if user input is valid
+                    print("Enter integers between 0 and 2.")
+                elif not board[move_x1][move_y1] == "?": # checks if selected square has been occupied
+                    print("That square is occupied. Retry.")
+                else:
+                    break
+
+            except ValueError:
                 print("Enter integers between 0 and 2.")
-            elif not board[move_x1][move_y1] == "?": # checks if selected square has been occupied
-                print("That square is occupied. Retry.")
-            else:
-                break
 
-        except ValueError:
-            print("Enter integers between 0 and 2.")
+        print("Player 1 made their move.")
+        boardUpdate(board, move_x1, move_y1, "X")
+        boardDisplay(board)
+        if checkWinner():
+            print("Player 1 won.")
+            game += False
+            break
+        
+        if checkDraw():
+            print("Draw.")
+            game += False
+            break
 
-    print("Player 1 made his move.")
-    boardUpdate(board, move_x1, move_y1, "X")
-    boardDisplay(board)
-    if checkWinner():
-        print("Player 1 won.")
-        game += False
-        break
-    
-    if checkDraw():
-        print("Draw.")
-        game += False
-        break
-    
-    while True: 
-        try: 
-            move_x2 = int(input("Player 2, enter your x coordinate:"))
-            move_y2 = int(input("Player 2, enter your y coordinate:"))
-            if not 0 <= move_x2 <= 2 or not 0<= move_y2 <= 2:
+        move_x2 = 0
+        move_y2 = 0
+
+        while board[move_x2][move_y2] != "?":
+            move_x2 = random.randint(0, 2)
+            move_y2 = random.randint(0, 2)
+
+
+        print("Computer made their move.")
+        boardUpdate(board, move_x2, move_y2, "O")
+        boardDisplay(board)
+        if checkWinner():
+            print("Computer won.")
+            game += False
+            break
+
+        print("-------------------------------------------------------------")
+
+def two_player():
+    game = True
+    while game: # game loop
+        if checkDraw():
+            print("Draw.")
+            game += False
+            break
+        
+        boardDisplay(board)
+
+        while True: 
+            try: 
+                move_x1 = int(input("Player 1, enter your x coordinate:"))
+                move_y1 = int(input("Player 1, enter your y coordinate:"))
+                if not 0 <= move_x1 <= 2 or not 0<= move_y1 <= 2: # checks if user input is valid
+                    print("Enter integers between 0 and 2.")
+                elif not board[move_x1][move_y1] == "?": # checks if selected square has been occupied
+                    print("That square is occupied. Retry.")
+                else:
+                    break
+
+            except ValueError:
                 print("Enter integers between 0 and 2.")
-            elif not board[move_x2][move_y2] == "?":
-                print("That square is occupied. Retry.")
-            else:
-                break
 
-        except ValueError:
-            print("Enter integers between 0 and 2.")
+        print("Player 1 made their move.")
+        boardUpdate(board, move_x1, move_y1, "X")
+        boardDisplay(board)
+        if checkWinner():
+            print("Player 1 won.")
+            game += False
+            break
+        
+        if checkDraw():
+            print("Draw.")
+            game += False
+            break
+        
+        while True: 
+            try: 
+                move_x2 = int(input("Player 2, enter your x coordinate:"))
+                move_y2 = int(input("Player 2, enter your y coordinate:"))
+                if not 0 <= move_x2 <= 2 or not 0<= move_y2 <= 2:
+                    print("Enter integers between 0 and 2.")
+                elif not board[move_x2][move_y2] == "?":
+                    print("That square is occupied. Retry.")
+                else:
+                    break
 
-    print("Player 2 made his move.")
-    boardUpdate(board, move_x2, move_y2, "O")
-    boardDisplay(board)
-    if checkWinner():
-        print("Player 2 won.")
-        game += False
-        break
+            except ValueError:
+                print("Enter integers between 0 and 2.")
 
-    print("-------------------------------------------------------------")
+        print("Player 2 made their move.")
+        boardUpdate(board, move_x2, move_y2, "O")
+        boardDisplay(board)
+        if checkWinner():
+            print("Player 2 won.")
+            game += False
+            break
+
+        print("-------------------------------------------------------------")
     
+def menu():
+    option = input("Enter 1 for two players. Enter 2 to play against a computer:")
+    if option == "1":
+        two_player()
+    elif option == "2":
+        computer()
+        
+menu()
